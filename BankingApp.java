@@ -46,6 +46,18 @@ public class BankingApp{
                     System.out.print("\tEnter an option to continue: ");
                     int option = SCANNER.nextInt();
                     SCANNER.nextLine();
+
+                    switch (option){
+                        case 1: screen = CREATE_ACCOUNT; break;
+                        case 2: screen = DIPOSITS; break;
+                        case 3: screen = WITHDRAWLS; break;
+                        case 4: screen = TRANSFER; break;
+                        case 5: screen = CHECK_BALANCE; break;
+                        case 6: screen = DELETE_ACCOUNT; break;
+                        case 7: System.out.println(CLEAR); System.exit(0);
+                        default: continue;
+                    }
+                    break;
         }while()
     }
 }
