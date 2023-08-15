@@ -10,7 +10,7 @@ public class BankingApp{
         final String COLOR_GREEN_BOLD = "\033[33;1m";
         final String RESET = "\033[0m";
 
-        final String DASHBOARD = "\u1F3E6 Welcome to Smart Banking";
+        final String DASHBOARD = " Welcome to Smart Banking";
         final String CREATE_ACCOUNT = "Create New Account";
         final String DIPOSITS = "Deposits";
         final String WITHDRAWLS = "Withdrawls";
@@ -42,6 +42,7 @@ public class BankingApp{
                     System.out.println("\t[3]. Withdrawls");
                     System.out.println("\t[4]. Transfer");
                     System.out.println("\t[5]. Check Account Balance");
+                    System.out.println("\t[6]. Delete Account");
                     System.out.println("\t[7]. Exit\n");
                     System.out.print("\tEnter an option to continue: ");
                     int option = SCANNER.nextInt();
@@ -60,10 +61,10 @@ public class BankingApp{
                     break;
 
                     case CREATE_ACCOUNT:
-                    String id;
+                    String id="\tAccount ID: SDB-%05d \n";
                     String name;
                     boolean valid;
-                    System.out.printf("\tNew Student ID: SDB-%05d \n", (accountIds.length + 1));
+                    System.out.printf(id, (accountIds.length + 1));
 
                     // Name Validation
                     do{
@@ -84,6 +85,43 @@ public class BankingApp{
                             }
                         }
                     }while (!valid);
+
+                    
+
+                    do{
+                        valid = true;
+                        System.out.print("\tEnter Initial Deposit: ");
+                        int deposits = SCANNER.nextInt();
+                        if (deposits<5000){
+                            System.out.printf(ERROR_MSG, "Insufficient Account Balance");
+                            valid = false;
+                            //continue;
+                        }else{
+
+                    String[] newAccountIds = new String[accountIds.length + 1];
+                    String[] newAccountNames = new String[accountNames.length + 1];
+                    for (int i = 0; i < accountIds.length; i++) {
+                        newAccountIds[i] = accountIds[i];
+                        newAccountNames[i] = accountNames[i];
+                    }
+                    newAccountIds[newAccountIds.length - 1] = id;
+                    newAccountNames[newAccountNames.length - 1] = name;
+                    accountIds = newAccountIds;
+                    accountNames = newAccountNames;
+
+
+                    System.out.println();
+                    System.out.printf(SUCCESS_MSG, 
+                        String.format("%s:%s has been saved successfully", id, name));
+                    System.out.print("\tDo you want to continue adding (Y/n)? ");
+                    String input=SCANNER.nextLine();
+                    if (SCANNER.nextLine().strip().toUpperCase().equals("Y")) continue;
+                    else screen = DASHBOARD;
+                    break;}
+                    }while (!valid);
+                
+                
+
         }
     }while(true);
 }}
