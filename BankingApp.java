@@ -58,6 +58,32 @@ public class BankingApp{
                         default: continue;
                     }
                     break;
-        }while()
-    }
-}
+
+                    case CREATE_ACCOUNT:
+                    String id;
+                    String name;
+                    boolean valid;
+                    System.out.printf("\tNew Student ID: SDB-%05d \n", (accountIds.length + 1));
+
+                    // Name Validation
+                    do{
+                        valid = true;
+                        System.out.print("\tEnter Account Name: ");
+                        name = SCANNER.nextLine().strip();
+                        if (name.isBlank()){
+                            System.out.printf(ERROR_MSG, "Account name can't be empty");
+                            valid = false;
+                            continue;
+                        }
+                        for (int i = 0; i < name.length(); i++) {
+                            if (!(Character.isLetter(name.charAt(i)) || 
+                                Character.isSpaceChar(name.charAt(i))) ) {
+                                System.out.printf(ERROR_MSG, "Invalid name");
+                                valid = false;
+                                break;
+                            }
+                        }
+                    }while (!valid);
+        }
+    }while(true);
+}}
